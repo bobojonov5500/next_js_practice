@@ -1,3 +1,5 @@
+import Hero from "./components/hero/hero";
+
 export const metadata = {
   title: "Home page",
   description: "This is the home page of my Next.js app",
@@ -5,8 +7,8 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <>
-        hello
-    </>
+    <div>
+       <Hero/>
+    </div>
   );
 }

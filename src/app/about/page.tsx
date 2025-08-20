@@ -4,7 +4,7 @@ export const metadata = {
   title: "about",
 };
 const About = () => {
-  return <div>about</div>;
+  return <div className="text-[50px]">about</div>;
 };
 
 export default About;
