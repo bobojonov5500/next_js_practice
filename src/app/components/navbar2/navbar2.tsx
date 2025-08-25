@@ -8,7 +8,7 @@ import { RiVuejsFill } from "react-icons/ri";
 const Navbar2 = () => {
   const [toggle, setToggle] = useState(false);
   return (
-    <div className="bg-zinc-700">
+    <div className="bg-zinc-700 ">
       <div className=" max-w-[1400px] m-auto  flex justify-between items-center px-4 py-4 ">
         <div>
           <Link
