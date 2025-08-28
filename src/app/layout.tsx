@@ -1,5 +1,4 @@
 import Footer from "./components/footer/footer";
-import Navbar from "./components/navbar/navbar";
 import Navbar2 from "./components/navbar2/navbar2";
 import "./globals.css";
 
@@ -9,9 +8,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="bg-zinc-800 h-screen text-amber-100">
+        <div className="bg-zinc-800 min-h-screen flex flex-col text-amber-100">
           <Navbar2 />
-          <div className="">{children}</div>
+          <div className="flex-grow mt-[67px]">{children}</div>
           <Footer />
         </div>
       </body>

@@ -28,10 +28,9 @@ const responsive = {
   },
 };
 
-console.log(mockData);
 const Hero = () => {
   return (
-    <div className=" h-[60vh] max-w-[1400px] m-auto">
+    <div>
       <Carousel responsive={responsive}>
         {mockData.map((item, index) => (
           <div
