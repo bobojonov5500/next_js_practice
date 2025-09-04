@@ -11,11 +11,11 @@ export default function Home() {
   return (
     <div className="max-w-[1400px] m-auto">
       <Hero />
-      <div className="flex w-full ">
-        <div className="w-[40%]  ">
+      <div className="flex w-full md:flex-row flex-col">
+        <div className="md:w-[40%] w-full  ">
           <Sidebar />
         </div>
-        <div className="w-[60%] border">
+        <div className="md:w-[60%] w-full">
           <Content />
         </div>
       </div>

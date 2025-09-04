@@ -50,14 +50,15 @@ const Hero = () => {
                 <p className="mt-2 text-[15px] max-w-[250px] xs:text-[20px] xs:max-w-[300px] sm:max-w-[600px]">
                   {item.description}
                 </p>
-                <div className="flex items-center mt-3 gap-3">
-                  <Image
-                    width={5}
-                    height={5}
-                    className="w-[40px] h-[40px] rounded-full"
-                    src={item.author.image}
-                    alt="author-image"
-                  />
+                <div className="flex items-center  mt-3 gap-3">
+                  <div className="w-[45px]  relative h-[45px]">
+                    <Image
+                      src={item.author.image}
+                      alt={item.author.image}
+                      fill
+                      className="object-cover rounded-full"
+                    />
+                  </div>
                   <div className=" text-[18px]">
                     <h4>{item.author.name}</h4>
                     <span className=" text-[13px]">
