@@ -16,6 +16,7 @@ const Content = () => {
               src={el.image}
               alt="Example Image"
               fill
+               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className=" object-cover  transition-transform duration-300 hover:scale-115"
             />
           </div>
@@ -29,6 +30,7 @@ const Content = () => {
                 alt={el.author.image}
                 fill
                 className="object-cover rounded-full"
+                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
             <div className="flex flex-col">

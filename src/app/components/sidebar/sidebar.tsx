@@ -34,6 +34,7 @@ const Sidebar = () => {
                   alt={item.image}
                   className="object-cover"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
               <div className=" ml-5">
@@ -46,6 +47,7 @@ const Sidebar = () => {
                       className="rounded-full"
                       src={item.author.image}
                       alt="author-image"
+                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
                   <div className="flex-col flex">

@@ -42,6 +42,8 @@ const Hero = () => {
               className="object-cover"
               src={item.image}
               alt="image1"
+              sizes="100vw"
+              priority
             />
             <div className="absolute inset-0 bg-black/40"></div>
             <div className="absolute inset-0 flex flex-col items-center xs:items-start  justify-center z-10 text-white">
@@ -53,6 +55,8 @@ const Hero = () => {
                 <div className="flex items-center  mt-3 gap-3">
                   <div className="w-[45px]  relative h-[45px]">
                     <Image
+                      sizes="45px"
+                      priority
                       src={item.author.image}
                       alt={item.author.image}
                       fill
