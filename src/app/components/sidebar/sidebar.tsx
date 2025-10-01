@@ -8,7 +8,7 @@ import { format } from "date-fns";
 const Sidebar = () => {
   return (
     <div className="sticky top-[80px]">
-      <div className="my-3 mx-2 border-2 p-3 rounded-[7px]">
+      <div className="my-3 mr-2 border-2 p-3 rounded-[7px]">
         <h1 className="text-[30px]">Category</h1>
         <div className="flex-col flex pl-2">
           {navItems.map((items, index) => (
@@ -23,7 +23,7 @@ const Sidebar = () => {
           ))}
         </div>
       </div>
-      <div className="my-3 text-white mx-2 border-2 p-3 rounded-[7px]">
+      <div className="my-3 text-white mr-2 border-2 p-3 rounded-[7px]">
         <h1 className="text-[30px]">Latest Blog</h1>
         {mockData.map((item, index) => (
           <div key={index}>

@@ -7,7 +7,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>
+      <body cz-shortcut-listen="true">
         <div className="bg-zinc-800 min-h-screen flex flex-col text-amber-100">
           <Navbar2 />
           <div className="flex-grow mt-[67px]">{children}</div>
