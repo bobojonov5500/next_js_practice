@@ -15,6 +15,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "randomuser.me",
       },
+      {
+        protocol: "https",
+        hostname: "us-west-2.graphassets.com",
+      },
     ],
   },
   // domains: ["images.pexels.com"],

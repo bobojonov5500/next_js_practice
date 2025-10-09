@@ -1,6 +1,10 @@
+import BlogsService from "@/services/blog.service";
 import Footer from "./components/footer/footer";
 import Navbar2 from "./components/navbar2/navbar2";
 import "./globals.css";
+
+
+const blogs = await BlogsService.getAllBlogs();
 
 export default function RootLayout({
   children,
@@ -9,7 +13,7 @@ export default function RootLayout({
     <html lang="en">
       <body cz-shortcut-listen="true">
         <div className="bg-zinc-800 min-h-screen flex flex-col text-amber-100">
-          <Navbar2 />
+          <Navbar2 blogs={blogs} />
           <div className="flex-grow mt-[67px]">{children}</div>
           <Footer />
         </div>

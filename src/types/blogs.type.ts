@@ -16,4 +16,5 @@ export type BlogsType = {
     label: string;
     slug: string;
   };
+  createdAt: Date;
 };
