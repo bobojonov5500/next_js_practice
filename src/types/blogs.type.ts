@@ -5,6 +5,9 @@ export type BlogsType = {
   };
   title: string;
   description: string;
+  statement: {
+    html: string;
+  };
   slug: string;
   author: {
     name: string;

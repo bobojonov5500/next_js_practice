@@ -4,7 +4,7 @@ import React from "react";
 import "react-multi-carousel/lib/styles.css";
 import Image from "next/image";
 import { format } from "date-fns";
-import mockData from "../../../../mock";
+import { BlogsType } from "@/types/blogs.type";
 
 const Carousel = dynamic(() => import("react-multi-carousel"), {
   ssr: false,
@@ -28,11 +28,11 @@ const responsive = {
   },
 };
 
-const Hero = () => {
+const Hero = ({ blogs }: { blogs: BlogsType[] }) => {
   return (
     <div>
       <Carousel responsive={responsive}>
-        {mockData.map((item, index) => (
+        {blogs.map((item: BlogsType, index: number) => (
           <div
             key={index}
             className="text-white relative w-full text-2xl  h-[60vh]"
@@ -40,7 +40,7 @@ const Hero = () => {
             <Image
               fill
               className="object-cover"
-              src={item.image}
+              src={item.image.url}
               alt="image1"
               sizes="100vw"
               priority
@@ -57,8 +57,8 @@ const Hero = () => {
                     <Image
                       sizes="45px"
                       priority
-                      src={item.author.image}
-                      alt={item.author.image}
+                      src={item.author.avatar.url}
+                      alt={item.author.avatar.url}
                       fill
                       className="object-cover rounded-full"
                     />
@@ -66,8 +66,8 @@ const Hero = () => {
                   <div className=" text-[18px]">
                     <h4>{item.author.name}</h4>
                     <span className=" text-[13px]">
-                      {` ${format(new Date(), "dd MMM, yyyy")}`} &#8226; 10min
-                      read
+                      {` ${format(new Date(item.createdAt), "dd MMM, yyyy")}`}{" "}
+                      &#8226; 10min read
                     </span>
                   </div>
                 </div>

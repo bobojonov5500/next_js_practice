@@ -1,12 +1,12 @@
 "use client";
-import { BlogsType } from "@/types/blogs.type";
+import { CategoriesType } from "@/types/categories.type";
 import Link from "next/link";
 import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
 import { RiVuejsFill } from "react-icons/ri";
 
-const Navbar2 = ({ blogs }: { blogs: BlogsType[] }) => {
+const Navbar2 = ({ categories }: { categories: CategoriesType[] }) => {
   const [toggle, setToggle] = useState(false);
   return (
     <div className="bg-zinc-700 fixed top-0 left-0 w-full z-1001 ">
@@ -20,16 +20,15 @@ const Navbar2 = ({ blogs }: { blogs: BlogsType[] }) => {
           </Link>
         </div>
         <ul className="list-none sm:flex cursor-pointer hidden gap-2 font-stretch-semi-expanded">
-          {blogs.map((blog: BlogsType, index: number) => (
+          {categories.map((category: CategoriesType, index: number) => (
             <Link
               key={index}
               className="hover:text-red-300 hover:underline"
-              href={`/${blog.category.slug}`}
+              href={`/${category.slug}`}
             >
-              {blog.category.label}
+              {category.label}
             </Link>
           ))}
-
         </ul>
 
         {/* mobile ui */}
@@ -39,8 +38,10 @@ const Navbar2 = ({ blogs }: { blogs: BlogsType[] }) => {
               "absolute sm:hidden z-1999 h-[calc(100vh-56px)] top-14 text-center w-full left-0 bg-zinc-700 flex flex-col items-center justify-center gap-6"
             }
           >
-            {blogs.map((blog: BlogsType, index: number) => (
-              <Link key={index} href={`/${blog.category.slug}`}>{blog.category.label}</Link>
+            {categories.map((category: CategoriesType, index: number) => (
+              <Link key={index} href={`/${category.slug}`}>
+                {category.label}
+              </Link>
             ))}
           </ul>
         )}
