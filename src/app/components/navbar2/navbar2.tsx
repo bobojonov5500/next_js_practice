@@ -8,6 +8,7 @@ import { RiVuejsFill } from "react-icons/ri";
 
 const Navbar2 = ({ categories }: { categories: CategoriesType[] }) => {
   const [toggle, setToggle] = useState(false);
+
   return (
     <div className="bg-zinc-700 fixed top-0 left-0 w-full z-1001 ">
       <div className=" max-w-[1400px] m-auto  flex justify-between items-center px-4 py-4 ">
@@ -24,7 +25,7 @@ const Navbar2 = ({ categories }: { categories: CategoriesType[] }) => {
             <Link
               key={index}
               className="hover:text-red-300 hover:underline"
-              href={`/${category.slug}`}
+              href={`/categories/${category.slug}`}
             >
               {category.label}
             </Link>
@@ -39,7 +40,7 @@ const Navbar2 = ({ categories }: { categories: CategoriesType[] }) => {
             }
           >
             {categories.map((category: CategoriesType, index: number) => (
-              <Link key={index} href={`/${category.slug}`}>
+              <Link key={index} href={`/categories/${category.slug}`}>
                 {category.label}
               </Link>
             ))}

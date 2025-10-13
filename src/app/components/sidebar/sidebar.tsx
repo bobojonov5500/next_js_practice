@@ -15,7 +15,7 @@ const Sidebar = ({ blogs }: { blogs: BlogsType[] }) => {
         <div className="flex-col flex pl-2">
           {blogs.map((item: BlogsType, index) => (
             <Link
-              href={`/${item.category.slug}`}
+              href={`categories/${item.category.slug}`}
               key={index}
               className="pt-3 hover:bg-zinc-600 transition-all font-bold duration-200 ease-out text-blue-400"
             >
