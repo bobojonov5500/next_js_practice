@@ -81,6 +81,32 @@ const BlogsService = {
     });
     return result.blog;
   },
+
+  getDetailedCategory: async (slug: string) => {
+    const query = gql`
+      query getBlogsByCategory($slug String!) {
+        blogs(where: { category: { slug: $slug } }) {
+          title
+          slug
+          id
+          description
+          author {
+            name
+            avatar {
+              url
+            }
+          }
+          category {
+            slug
+          }
+        }
+      }
+    `;
+    const result = await request<{ blog: BlogsType }>(graphAPI, query, {
+      slug,
+    });
+    return result.blog;
+  },
 };
 
 export default BlogsService;
