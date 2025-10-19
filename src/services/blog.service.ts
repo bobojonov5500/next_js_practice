@@ -1,3 +1,4 @@
+import { BlogsType } from "./../types/blogs.type";
 import { BlogsType } from "@/types/blogs.type";
 import { CategoriesType } from "@/types/categories.type";
 import { request, gql } from "graphql-request";
@@ -84,7 +85,7 @@ const BlogsService = {
 
   getDetailedCategory: async (slug: string) => {
     const query = gql`
-      query getBlogsByCategory($slug String!) {
+      query getBlogsByCategory($slug: String!) {
         blogs(where: { category: { slug: $slug } }) {
           title
           slug
@@ -106,6 +107,40 @@ const BlogsService = {
       slug,
     });
     return result.blog;
+  },
+
+  getBlogsByCategory: async (slug: string) => {
+    const query = gql`
+      query GetBlogsByCategory($slug: String!) {
+        category(where: { slug: $slug }) {
+          blog {
+            id
+            image {
+              url
+            }
+            title
+            description
+            author {
+              name
+              avatar {
+                url
+              }
+            }
+              slug
+            createdAt
+          }
+        }
+      }
+    `;
+
+    const result = await request<{ category: { blog: BlogsType[] } }>(
+      graphAPI,
+      query,
+      {
+        slug,
+      }
+    );
+    return result.category?.blog || null;
   },
 };
 

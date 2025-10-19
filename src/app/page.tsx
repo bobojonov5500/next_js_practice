@@ -10,13 +10,14 @@ export const metadata = {
 
 export default async function Home() {
   const blogs = await BlogsService.getAllBlogs();
+  const categories = await BlogsService.getCategories();
 
-  return (    
+  return (
     <div className="max-w-[1400px]  m-auto">
       <Hero blogs={blogs} />
       <div className="flex w-full md:flex-row flex-col">
         <div className="md:w-[40%]  w-full  ">
-          <Sidebar blogs={blogs} /> 
+          <Sidebar blogs={blogs} categories={categories} />
         </div>
         <div className="md:w-[60%] w-full">
           <Content blogs={blogs} />

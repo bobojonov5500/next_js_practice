@@ -18,6 +18,6 @@ export type BlogsType = {
   category: {
     label: string;
     slug: string;
-  };
+  }[];
   createdAt: Date;
 };

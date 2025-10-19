@@ -4,21 +4,20 @@ import React from "react";
 import Image from "next/image";
 import { format } from "date-fns";
 
-const DetailedBlogsPage = async (props: {
-  params: Promise<{ slug: string }>;
-}) => {
-  const { slug } = await props.params;
+const DetailedBlogsPage = async ({ params }: { params: { slug: string } }) => {
+  const { slug } = await params;
   const blog = await BlogsService.getDetailedBlogs(slug);
   const blogs = await BlogsService.getAllBlogs();
+  const categories = await BlogsService.getCategories();
+
   return (
-    <div className="flex w-full md:flex-row flex-col ">
-      <div className="md:w-[70%] w-full mx-2 my-3 fill-white drop-shadow-xl/50">
-        <div className="w-full relative rounded-lg h-[50vh]  overflow-hidden ">
+    <div className="flex px-2 gap-2 w-full md:flex-row flex-col ">
+      <div className="md:w-[70%] w-full my-3 fill-white drop-shadow-xl/50">
+        <div className="  relative  rounded-lg h-[50vh]  overflow-hidden ">
           <Image
             src={blog.image.url}
             alt="Example Image"
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className=" object-cover  transition-transform duration-300 hover:scale-115"
           />
         </div>
@@ -45,11 +44,16 @@ const DetailedBlogsPage = async (props: {
           <h1 className="text-[35px]">{blog.title}</h1>
           <p className="opacity-45">{blog.description}</p>
           <hr className="my-3 opacity-40" />
-          <div dangerouslySetInnerHTML={{ __html: blog.statement.html }}></div>
+          <div className="  break-words overflow-hidden text-white">
+            <div
+              className="[&_p]:text-white [&_h1]:text-lg [&_h2]:text-base [&_*]:text-white"
+              dangerouslySetInnerHTML={{ __html: blog.statement.html }}
+            ></div>
+          </div>
         </div>
       </div>
       <div className="md:w-[30%] mb-2 w-full  ">
-        <Sidebar blogs={blogs} />
+        <Sidebar slug={slug} blogs={blogs} categories={categories} />
       </div>
     </div>
   );
