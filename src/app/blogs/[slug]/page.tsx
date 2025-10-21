@@ -13,8 +13,8 @@ export async function generateMetadata({
   const blog = await BlogsService.getDetailedBlogs(slug);
 
   return {
-    title: blog.title,
-    description: blog.description,
+    title: blog?.title || 'Blog details',
+    description: blog?.description || "",
     icons: {
       icon: "/icons8-youtube-96.png",
     },
@@ -61,7 +61,7 @@ const DetailedBlogsPage = async ({ params }: { params: { slug: string } }) => {
           <h1 className="text-[35px]">{blog.title}</h1>
           <p className="opacity-45">{blog.description}</p>
           <hr className="my-3 opacity-40" />
-          <div className="  break-words overflow-hidden text-white">
+          <div className="   overflow-hidden text-white">
             <div
               className="[&_p]:text-white [&_h1]:text-lg [&_h2]:text-base [&_*]:text-white"
               dangerouslySetInnerHTML={{ __html: blog.statement.html }}

@@ -8,10 +8,12 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   return {
-    title: slug.slice(0, 1).toUpperCase() + slug.slice(1, slug.length),
+    title:
+      slug?.slice(0, 1).toUpperCase() + slug?.slice(1, slug?.length) ||
+      "Category details",
     icons: {
       icon: "/icons8-youtube-96.png",
     },
