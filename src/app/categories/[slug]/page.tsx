@@ -3,13 +3,28 @@ import Sidebar from "@/app/components/sidebar/sidebar";
 import BlogsService from "@/services/blog.service";
 import React from "react";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const { slug } = params;
+
+  return {
+    title: slug.slice(0, 1).toUpperCase() + slug.slice(1, slug.length),
+    icons: {
+      icon: "/icons8-youtube-96.png",
+    },
+  };
+}
+
 const CategoryDetails = async ({ params }: { params: { slug: string } }) => {
   const { slug } = await params;
   const blogs = await BlogsService.getBlogsByCategory(slug);
   const categories = await BlogsService.getCategories();
 
   return (
-    <div className="flex w-full md:flex-row flex-col">
+    <div className="flex w-full md:flex-row px-2 flex-col">
       <div className="flex w-full md:flex-row flex-col">
         <div className="md:w-[40%]  w-full  ">
           <Sidebar slug={slug} blogs={blogs} categories={categories} />

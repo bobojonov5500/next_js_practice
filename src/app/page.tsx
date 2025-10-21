@@ -6,6 +6,10 @@ import BlogsService from "@/services/blog.service";
 export const metadata = {
   title: "Home page",
   description: "This is the home page of my Next.js app",
+  icons:{
+    icon:'/icons8-youtube-96.png'
+  }
+
 };
 
 export default async function Home() {
@@ -17,7 +21,7 @@ export default async function Home() {
       <Hero blogs={blogs} />
       <div className="flex w-full md:flex-row flex-col">
         <div className="md:w-[40%]  w-full  ">
-          <Sidebar blogs={blogs} categories={categories} />
+          <Sidebar slug="" blogs={blogs} categories={categories} />
         </div>
         <div className="md:w-[60%] w-full">
           <Content blogs={blogs} />

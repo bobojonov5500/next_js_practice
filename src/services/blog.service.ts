@@ -1,4 +1,3 @@
-import { BlogsType } from "./../types/blogs.type";
 import { BlogsType } from "@/types/blogs.type";
 import { CategoriesType } from "@/types/categories.type";
 import { request, gql } from "graphql-request";
@@ -126,7 +125,7 @@ const BlogsService = {
                 url
               }
             }
-              slug
+            slug
             createdAt
           }
         }

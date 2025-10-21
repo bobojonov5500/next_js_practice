@@ -4,6 +4,23 @@ import React from "react";
 import Image from "next/image";
 import { format } from "date-fns";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const { slug } = await params;
+  const blog = await BlogsService.getDetailedBlogs(slug);
+
+  return {
+    title: blog.title,
+    description: blog.description,
+    icons: {
+      icon: "/icons8-youtube-96.png",
+    },
+  };
+}
+
 const DetailedBlogsPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = await params;
   const blog = await BlogsService.getDetailedBlogs(slug);
