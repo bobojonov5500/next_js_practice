@@ -29,44 +29,52 @@ const responsive = {
 };
 
 const Hero = ({ blogs }: { blogs: BlogsType[] }) => {
+  if (!blogs || blogs.length === 0) {
+    return <p className="text-white">No featured blogs available.</p>;
+  }
+
   return (
     <div>
       <Carousel responsive={responsive}>
-        {blogs?.map((item: BlogsType, index: number) => (
+        {blogs.map((item: BlogsType, index: number) => (
           <div
             key={index}
-            className="text-white relative w-full text-2xl  h-[60vh]"
+            className="text-white relative w-full text-2xl h-[60vh]"
           >
             <Image
               fill
               className="object-cover"
-              src={item?.image?.url}
-              alt="image1"
+              src={item?.image?.url || "/placeholder.png"}
+              alt={item?.title || "Blog Image"}
               sizes="100vw"
               priority
             />
             <div className="absolute inset-0 bg-black/40"></div>
-            <div className="absolute inset-0 flex flex-col items-center xs:items-start  justify-center z-10 text-white">
+            <div className="absolute inset-0 flex flex-col items-center xs:items-start justify-center z-10 text-white">
               <div className="mt-[120px] xs:mt-0 xs:ml-[90px] sm:ml-[100px] md:ml-[120px]">
-                <h2 className="text-3xl font-bold">{item?.title}</h2>
+                <h2 className="text-3xl font-bold">
+                  {item?.title || "Untitled"}
+                </h2>
                 <p className="mt-2 text-[15px] max-w-[250px] xs:text-[20px] xs:max-w-[300px] sm:max-w-[600px]">
-                  {item?.description}
+                  {item?.description || ""}
                 </p>
-                <div className="flex items-center  mt-3 gap-3">
-                  <div className="w-[45px]  relative h-[45px]">
+                <div className="flex items-center mt-3 gap-3">
+                  <div className="w-[45px] relative h-[45px]">
                     <Image
                       sizes="45px"
                       priority
-                      src={item.author.avatar.url}
-                      alt={item.author.avatar.url}
+                      src={item?.author?.avatar?.url || "/default-avatar.png"}
+                      alt={item?.author?.name || "Author"}
                       fill
                       className="object-cover rounded-full"
                     />
                   </div>
-                  <div className=" text-[18px]">
-                    <h4>{item?.author?.name}</h4>
-                    <span className=" text-[13px]">
-                      {` ${format(new Date(item?.createdAt), "dd MMM, yyyy")}`}{" "}
+                  <div className="text-[18px]">
+                    <h4>{item?.author?.name || "Unknown"}</h4>
+                    <span className="text-[13px]">
+                      {item?.createdAt
+                        ? format(new Date(item.createdAt), "dd MMM, yyyy")
+                        : ""}{" "}
                       &#8226; 10min read
                     </span>
                   </div>
