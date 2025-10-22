@@ -6,9 +6,9 @@ import React from "react";
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string }; // Promise emas, oddiy object
+  params: Promise<{ slug: string }>; // Promise emas, oddiy object
 }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   return {
     title:
@@ -22,9 +22,9 @@ export async function generateMetadata({
 const CategoryDetails = async ({
   params,
 }: {
-  params: { slug: string }; // Promise emas
+  params: Promise<{ slug: string }>; // Promise emas
 }) => {
-  const { slug } = params;
+  const { slug } = await params;
 
   // Server fetch bilan fallback qo‘shish
   const blogs = (await BlogsService.getBlogsByCategory(slug)) || [];

@@ -7,9 +7,9 @@ import { format } from "date-fns";
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string }; // Next.js 15 da params Promise emas, oddiy object bo‘ladi
+  params: Promise<{ slug: string }>; // Next.js 15 da params Promise emas, oddiy object bo‘ladi
 }) {
-  const { slug } = params;
+  const { slug } = await params;
   const blog = await BlogsService.getDetailedBlogs(slug);
 
   // Fallback bilan metadata
@@ -22,8 +22,12 @@ export async function generateMetadata({
   };
 }
 
-const DetailedBlogsPage = async ({ params }: { params: { slug: string } }) => {
-  const { slug } = params;
+const DetailedBlogsPage = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
+  const { slug } = await params;
 
   // Server fetch
   const blog = (await BlogsService.getDetailedBlogs(slug)) || {
