@@ -100,11 +100,25 @@ const BlogsService = {
               label
               slug
             }
+            statement {
+              html
+            }
             createdAt
           }
         }
       `;
       const result = await request<{ blogs: BlogsType[] }>(graphAPI, query);
+      console.log("Fetched blogs from Hygraph:", {
+        count: result.blogs?.length || 0,
+        blogs: result.blogs?.map(blog => ({
+          id: blog.id,
+          title: blog.title,
+          hasImage: !!blog.image?.url,
+          hasAuthor: !!blog.author?.name,
+          hasCategory: !!blog.category,
+          hasStatement: !!blog.statement?.html
+        }))
+      });
       return result.blogs;
     } catch (error) {
       console.error("Error fetching blogs:", error);
@@ -132,6 +146,13 @@ const BlogsService = {
         graphAPI,
         query
       );
+      console.log("Fetched categories from Hygraph:", {
+        count: result.categories?.length || 0,
+        categories: result.categories?.map(cat => ({
+          slug: cat.slug,
+          label: cat.label
+        }))
+      });
       return result.categories;
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -156,7 +177,6 @@ const BlogsService = {
             image {
               url
             }
-
             statement {
               html
             }
@@ -168,6 +188,10 @@ const BlogsService = {
                 url
               }
             }
+            category {
+              label
+              slug
+            }
           }
         }
       `;
@@ -175,6 +199,7 @@ const BlogsService = {
       const result = await request<{ blog: BlogsType }>(graphAPI, query, {
         slug,
       });
+      console.log("Fetched detailed blog from Hygraph:", result.blog?.title);
       return result.blog;
     } catch (error) {
       console.error("Error fetching detailed blog:", error);
@@ -204,14 +229,23 @@ const BlogsService = {
             }
             category {
               slug
+              label
             }
+            image {
+              url
+            }
+            statement {
+              html
+            }
+            createdAt
           }
         }
       `;
-      const result = await request<{ blog: BlogsType }>(graphAPI, query, {
+      const result = await request<{ blogs: BlogsType[] }>(graphAPI, query, {
         slug,
       });
-      return result.blog;
+      console.log("Fetched blogs by category from Hygraph:", result.blogs?.length || 0);
+      return result.blogs;
     } catch (error) {
       console.error("Error fetching detailed category:", error);
       return null;
@@ -227,22 +261,30 @@ const BlogsService = {
       
       const query = gql`
         query GetBlogsByCategory($slug: String!) {
-        category(where: { slug: $slug }) {
-          blog {
-            id
-            image {
-              url
-            }
-            title
-            description
-            author {
-              name
-              avatar {
+          category(where: { slug: $slug }) {
+            blog {
+              id
+              image {
                 url
               }
+              title
+              description
+              author {
+                name
+                avatar {
+                  url
+                }
+              }
+              slug
+              createdAt
+              category {
+                label
+                slug
+              }
+              statement {
+                html
+              }
             }
-            slug
-            createdAt
           }
         }
       `;
@@ -254,6 +296,7 @@ const BlogsService = {
           slug,
         }
       );
+      console.log("Fetched blogs by category from Hygraph:", result.category?.blog?.length || 0);
       return result.category?.blog || [];
     } catch (error) {
       console.error("Error fetching blogs by category:", error);
