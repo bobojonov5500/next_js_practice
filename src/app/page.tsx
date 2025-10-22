@@ -20,7 +20,7 @@ export default async function Home() {
   return (
     <div className="max-w-[1400px]  m-auto">
       <Hero blogs={blogs} />
-      <div className="flex w-full md:flex-row flex-col">
+      <div className="flex w-full md:flex-row gap-x-3 flex-col">
         <div className="md:w-[40%]  w-full  ">
           <Sidebar slug="" blogs={blogs} categories={categories} />
         </div>

@@ -8,7 +8,7 @@ const graphAPI = process.env.NEXT_PUBLIC_HYGRAPH_ENDPOIT as string;
 console.log("Environment check:", {
   hasGraphAPI: !!graphAPI,
   graphAPI: graphAPI ? "Configured" : "Not configured",
-  nodeEnv: process.env.NODE_ENV
+  nodeEnv: process.env.NODE_ENV,
 });
 
 // Fallback data for when GraphQL is not available
@@ -19,67 +19,70 @@ const fallbackBlogs: BlogsType[] = [
     description: "This is a sample blog post to demonstrate the functionality.",
     slug: "welcome-to-our-blog",
     image: {
-      url: "https://images.pexels.com/photos/414171/pexels-photo-414171.jpeg"
+      url: "https://images.pexels.com/photos/414171/pexels-photo-414171.jpeg",
     },
     author: {
       name: "Admin",
       avatar: {
-        url: "https://randomuser.me/api/portraits/men/32.jpg"
-      }
+        url: "https://randomuser.me/api/portraits/men/32.jpg",
+      },
     },
-    category: [{
-      label: "General",
-      slug: "general"
-    }],
+    category: [
+      {
+        label: "General",
+        slug: "general",
+      },
+    ],
     statement: {
-      html: "<p>This is a sample blog post content.</p>"
+      html: "<p>This is a sample blog post content.</p>",
     },
-    createdAt: new Date()
+    createdAt: new Date(),
   },
   {
-    id: "2", 
+    id: "2",
     title: "Getting Started with Next.js",
     description: "Learn the basics of Next.js development.",
     slug: "getting-started-with-nextjs",
     image: {
-      url: "https://images.pexels.com/photos/127028/pexels-photo-127028.jpeg"
+      url: "https://images.pexels.com/photos/127028/pexels-photo-127028.jpeg",
     },
     author: {
       name: "Developer",
       avatar: {
-        url: "https://randomuser.me/api/portraits/women/44.jpg"
-      }
+        url: "https://randomuser.me/api/portraits/women/44.jpg",
+      },
     },
-    category: [{
-      label: "Technology",
-      slug: "technology"
-    }],
+    category: [
+      {
+        label: "Technology",
+        slug: "technology",
+      },
+    ],
     statement: {
-      html: "<p>Learn the basics of Next.js development in this comprehensive guide.</p>"
+      html: "<p>Learn the basics of Next.js development in this comprehensive guide.</p>",
     },
-    createdAt: new Date()
-  }
+    createdAt: new Date(),
+  },
 ];
 
 const fallbackCategories: CategoriesType[] = [
   {
     slug: "general",
-    label: "General"
+    label: "General",
   },
   {
-    slug: "technology", 
-    label: "Technology"
-  }
+    slug: "technology",
+    label: "Technology",
+  },
 ];
 
 const BlogsService = {
   getAllBlogs: async (): Promise<BlogsType[]> => {
     try {
       if (!graphAPI) {
-        console.warn("GraphQL endpoint not configured, using fallback data");
         return fallbackBlogs;
       }
-      
+
       const query = gql`
         query GetBlogs {
           blogs {
@@ -108,17 +111,7 @@ const BlogsService = {
         }
       `;
       const result = await request<{ blogs: BlogsType[] }>(graphAPI, query);
-      console.log("Fetched blogs from Hygraph:", {
-        count: result.blogs?.length || 0,
-        blogs: result.blogs?.map(blog => ({
-          id: blog.id,
-          title: blog.title,
-          hasImage: !!blog.image?.url,
-          hasAuthor: !!blog.author?.name,
-          hasCategory: !!blog.category,
-          hasStatement: !!blog.statement?.html
-        }))
-      });
+
       return result.blogs;
     } catch (error) {
       console.error("Error fetching blogs:", error);
@@ -130,10 +123,9 @@ const BlogsService = {
   getCategories: async (): Promise<CategoriesType[]> => {
     try {
       if (!graphAPI) {
-        console.warn("GraphQL endpoint not configured, using fallback data");
         return fallbackCategories;
       }
-      
+
       const query = gql`
         query GetCategories {
           categories {
@@ -146,13 +138,7 @@ const BlogsService = {
         graphAPI,
         query
       );
-      console.log("Fetched categories from Hygraph:", {
-        count: result.categories?.length || 0,
-        categories: result.categories?.map(cat => ({
-          slug: cat.slug,
-          label: cat.label
-        }))
-      });
+
       return result.categories;
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -164,10 +150,9 @@ const BlogsService = {
   getDetailedBlogs: async (slug: string) => {
     try {
       if (!graphAPI) {
-        console.warn("GraphQL endpoint not configured");
         return null;
       }
-      
+
       const query = gql`
         query GetDetailedBlog($slug: String!) {
           blog(where: { slug: $slug }) {
@@ -199,7 +184,6 @@ const BlogsService = {
       const result = await request<{ blog: BlogsType }>(graphAPI, query, {
         slug,
       });
-      console.log("Fetched detailed blog from Hygraph:", result.blog?.title);
       return result.blog;
     } catch (error) {
       console.error("Error fetching detailed blog:", error);
@@ -210,10 +194,9 @@ const BlogsService = {
   getDetailedCategory: async (slug: string) => {
     try {
       if (!graphAPI) {
-        console.warn("GraphQL endpoint not configured");
         return null;
       }
-      
+
       const query = gql`
         query getBlogsByCategory($slug: String!) {
           blogs(where: { category: { slug: $slug } }) {
@@ -244,7 +227,7 @@ const BlogsService = {
       const result = await request<{ blogs: BlogsType[] }>(graphAPI, query, {
         slug,
       });
-      console.log("Fetched blogs by category from Hygraph:", result.blogs?.length || 0);
+
       return result.blogs;
     } catch (error) {
       console.error("Error fetching detailed category:", error);
@@ -255,10 +238,9 @@ const BlogsService = {
   getBlogsByCategory: async (slug: string) => {
     try {
       if (!graphAPI) {
-        console.warn("GraphQL endpoint not configured, using fallback data");
-        return fallbackBlogs.filter(blog => blog.category[0]?.slug === slug);
+        return fallbackBlogs.filter((blog) => blog.category[0]?.slug === slug);
       }
-      
+
       const query = gql`
         query GetBlogsByCategory($slug: String!) {
           category(where: { slug: $slug }) {
@@ -296,12 +278,12 @@ const BlogsService = {
           slug,
         }
       );
-      console.log("Fetched blogs by category from Hygraph:", result.category?.blog?.length || 0);
+
       return result.category?.blog || [];
     } catch (error) {
       console.error("Error fetching blogs by category:", error);
       console.warn("Using fallback data due to error");
-      return fallbackBlogs.filter(blog => blog.category[0]?.slug === slug);
+      return fallbackBlogs.filter((blog) => blog.category[0]?.slug === slug);
     }
   },
 };

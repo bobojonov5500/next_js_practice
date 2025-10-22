@@ -17,7 +17,7 @@ const Sidebar: React.FC<SidebarProps> = ({ blogs, categories, slug }) => {
   const router = useRouter();
 
   return (
-    <aside className="sticky top-[80px] space-y-5">
+    <aside className="sticky mt-4 top-[80px] space-y-5">
       {/* CATEGORY LIST */}
       <div className="border-2 p-3 rounded-[7px]">
         <h2 className="text-[30px] mb-3">Category</h2>
