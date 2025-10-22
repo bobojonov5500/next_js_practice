@@ -8,12 +8,13 @@ import "nprogress/nprogress.css";
 export default function ClientProgress() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const searchParamsString = searchParams.toString();
 
   useEffect(() => {
     NProgress.start();
     const timer = setTimeout(() => NProgress.done(), 300);
     return () => clearTimeout(timer);
-  }, [pathname, searchParams.toString()]); // stable dependency
+  }, [pathname, searchParamsString]); // stable dependency
 
   return null;
 }
