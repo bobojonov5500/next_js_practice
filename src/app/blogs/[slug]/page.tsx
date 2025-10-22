@@ -7,13 +7,13 @@ import { format } from "date-fns";
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
   const blog = await BlogsService.getDetailedBlogs(slug);
 
   return {
-    title: blog?.title || 'Blog details',
+    title: blog?.title || "Blog details",
     description: blog?.description || "",
     icons: {
       icon: "/icons8-youtube-96.png",
@@ -21,7 +21,11 @@ export async function generateMetadata({
   };
 }
 
-const DetailedBlogsPage = async ({ params }: { params: { slug: string } }) => {
+const DetailedBlogsPage = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
   const { slug } = await params;
   const blog = await BlogsService.getDetailedBlogs(slug);
   const blogs = await BlogsService.getAllBlogs();

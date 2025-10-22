@@ -11,14 +11,9 @@ export default function ClientProgress() {
 
   useEffect(() => {
     NProgress.start();
-    const timer = setTimeout(() => {
-      NProgress.done();
-    }, 500);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [pathname, searchParams]);
+    const timer = setTimeout(() => NProgress.done(), 300);
+    return () => clearTimeout(timer);
+  }, [pathname, searchParams.toString()]); // stable dependency
 
   return null;
 }

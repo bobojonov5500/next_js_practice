@@ -6,7 +6,7 @@ import React from "react";
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
 
@@ -20,7 +20,11 @@ export async function generateMetadata({
   };
 }
 
-const CategoryDetails = async ({ params }: { params: { slug: string } }) => {
+const CategoryDetails = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
   const { slug } = await params;
   const blogs = await BlogsService.getBlogsByCategory(slug);
   const categories = await BlogsService.getCategories();
