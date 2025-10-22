@@ -16,6 +16,7 @@ export default async function Home() {
   const blogs = await BlogsService.getAllBlogs();
   const categories = await BlogsService.getCategories();
 
+
   return (
     <div className="max-w-[1400px]  m-auto">
       <Hero blogs={blogs} />

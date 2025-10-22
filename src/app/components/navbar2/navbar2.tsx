@@ -1,17 +1,29 @@
 "use client";
 import { CategoriesType } from "@/types/categories.type";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
 import { RiVuejsFill } from "react-icons/ri";
+import BlogsService from "@/services/blog.service";
 
-interface Navbar2Props {
-  categories: CategoriesType[];
-}
-
-const Navbar2: React.FC<Navbar2Props> = ({ categories }) => {
+const Navbar2: React.FC = () => {
   const [toggle, setToggle] = useState(false);
+  const [categories, setCategories] = useState<CategoriesType[]>([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const categoriesData = await BlogsService.getCategories();
+        setCategories(categoriesData);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+        setCategories([]);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   return (
     <nav className="bg-zinc-700 fixed top-0 left-0 w-full z-1001">

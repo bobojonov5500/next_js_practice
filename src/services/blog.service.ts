@@ -6,48 +6,68 @@ const graphAPI = process.env.NEXT_PUBLIC_HYGRAPH_ENDPOIT as string;
 
 const BlogsService = {
   getAllBlogs: async (): Promise<BlogsType[]> => {
-    const query = gql`
-      query GetBlogs {
-        blogs {
-          id
-          image {
-            url
-          }
-          title
-          description
-          slug
-          author {
-            name
-            avatar {
+    try {
+      if (!graphAPI) {
+        console.warn("GraphQL endpoint not configured");
+        return [];
+      }
+      
+      const query = gql`
+        query GetBlogs {
+          blogs {
+            id
+            image {
               url
             }
-          }
-          category {
-            label
+            title
+            description
             slug
+            author {
+              name
+              avatar {
+                url
+              }
+            }
+            category {
+              label
+              slug
+            }
+            createdAt
           }
-          createdAt
         }
-      }
-    `;
-    const result = await request<{ blogs: BlogsType[] }>(graphAPI, query);
-    return result.blogs;
+      `;
+      const result = await request<{ blogs: BlogsType[] }>(graphAPI, query);
+      return result.blogs;
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
+      return [];
+    }
   },
 
   getCategories: async (): Promise<CategoriesType[]> => {
-    const query = gql`
-      query GetCategories {
-        categories {
-          slug
-          label
-        }
+    try {
+      if (!graphAPI) {
+        console.warn("GraphQL endpoint not configured");
+        return [];
       }
-    `;
-    const result = await request<{ categories: CategoriesType[] }>(
-      graphAPI,
-      query
-    );
-    return result.categories;
+      
+      const query = gql`
+        query GetCategories {
+          categories {
+            slug
+            label
+          }
+        }
+      `;
+      const result = await request<{ categories: CategoriesType[] }>(
+        graphAPI,
+        query
+      );
+      return result.categories;
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      return [];
+    }
   },
 
   getDetailedBlogs: async (slug: string) => {
