@@ -21,13 +21,13 @@ const Navbar2 = ({ categories }: { categories: CategoriesType[] }) => {
           </Link>
         </div>
         <ul className="list-none sm:flex cursor-pointer hidden gap-2 font-stretch-semi-expanded">
-          {categories.map((category: CategoriesType, index: number) => (
+          {categories?.map((category: CategoriesType, index: number) => (
             <Link
               key={index}
               className="hover:text-red-300 hover:underline"
-              href={`/categories/${category.slug}`}
+              href={`/categories/${category?.slug}`}
             >
-              {category.label}
+              {category?.label}
             </Link>
           ))}
         </ul>
@@ -39,9 +39,9 @@ const Navbar2 = ({ categories }: { categories: CategoriesType[] }) => {
               "absolute sm:hidden z-1999 h-[calc(100vh-56px)] top-14 text-center w-full left-0 bg-zinc-700 flex flex-col items-center justify-center gap-6"
             }
           >
-            {categories.map((category: CategoriesType, index: number) => (
-              <Link key={index} href={`/categories/${category.slug}`}>
-                {category.label}
+            {categories?.map((category: CategoriesType, index: number) => (
+              <Link key={index} href={`/categories/${category?.slug}`}>
+                {category?.label}
               </Link>
             ))}
           </ul>

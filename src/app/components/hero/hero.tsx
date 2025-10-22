@@ -32,7 +32,7 @@ const Hero = ({ blogs }: { blogs: BlogsType[] }) => {
   return (
     <div>
       <Carousel responsive={responsive}>
-        {blogs.map((item: BlogsType, index: number) => (
+        {blogs?.map((item: BlogsType, index: number) => (
           <div
             key={index}
             className="text-white relative w-full text-2xl  h-[60vh]"
@@ -40,7 +40,7 @@ const Hero = ({ blogs }: { blogs: BlogsType[] }) => {
             <Image
               fill
               className="object-cover"
-              src={item.image.url}
+              src={item?.image?.url}
               alt="image1"
               sizes="100vw"
               priority
@@ -48,9 +48,9 @@ const Hero = ({ blogs }: { blogs: BlogsType[] }) => {
             <div className="absolute inset-0 bg-black/40"></div>
             <div className="absolute inset-0 flex flex-col items-center xs:items-start  justify-center z-10 text-white">
               <div className="mt-[120px] xs:mt-0 xs:ml-[90px] sm:ml-[100px] md:ml-[120px]">
-                <h2 className="text-3xl font-bold">{item.title}</h2>
+                <h2 className="text-3xl font-bold">{item?.title}</h2>
                 <p className="mt-2 text-[15px] max-w-[250px] xs:text-[20px] xs:max-w-[300px] sm:max-w-[600px]">
-                  {item.description}
+                  {item?.description}
                 </p>
                 <div className="flex items-center  mt-3 gap-3">
                   <div className="w-[45px]  relative h-[45px]">
@@ -64,9 +64,9 @@ const Hero = ({ blogs }: { blogs: BlogsType[] }) => {
                     />
                   </div>
                   <div className=" text-[18px]">
-                    <h4>{item.author.name}</h4>
+                    <h4>{item?.author?.name}</h4>
                     <span className=" text-[13px]">
-                      {` ${format(new Date(item.createdAt), "dd MMM, yyyy")}`}{" "}
+                      {` ${format(new Date(item?.createdAt), "dd MMM, yyyy")}`}{" "}
                       &#8226; 10min read
                     </span>
                   </div>
