@@ -78,7 +78,7 @@ const DetailedBlogsPage = async ({
           <hr className="my-3 opacity-40" />
           <div className="overflow-hidden text-white">
             <div
-              className="[&_p]:text-white [&_h1]:text-lg [&_h2]:text-base [&_*]:text-white"
+              className="[&_p]:text-white [&_h1]:text-lg [&_h2]:text-base **:text-white"
               dangerouslySetInnerHTML={{ __html: blog.statement.html }}
             ></div>
           </div>
